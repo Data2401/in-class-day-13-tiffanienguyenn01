@@ -1,0 +1,185 @@
+---
+title: "Intro to dplyr -  Lab"
+output: html_document
+---
+```{r}
+library(tidyverse)
+```
+
+
+
+
+## Dplyr practice
+
+Install the `"nycflights13"` package. Load (`library()`) the package.
+You'll also need to load `tidyverse` The data frame called `flights` should now be accessible to you.
+
+```{r}
+# install.packages("nycflights13") # once per computer 
+library(nycflights13) # every time you use it
+library(tidyverse)
+
+my_flights <- flights ## getting a copy of the data in the environment
+```
+
+
+1. Use functions to inspect it: how many rows and columns does it have? What are the names of the columns? Hint: Use `??flights` to search for documentation on the data set (for what the columns contain)
+
+```{r}
+
+```
+
+
+2. Use `dplyr` to give the data frame a new column that is the amount of time gained or lost while flying (that is: how much of the delay arriving occurred during flight, as opposed to before departing).
+
+```{r}
+
+```
+
+
+
+3. Use `dplyr` to sort your data frame in descending order by the column you just created. Remember to save this as a variable (or in the same one!)
+
+```{r}
+
+```
+
+4. If you haven't already, do the last 2 steps in a single statement using the pipe operator. 
+
+```{r}
+
+```
+
+5. Make a histogram of the amount of time gained using the `hist()` function
+
+```{r}
+
+```
+
+
+6. On average, did flights gain or lose time? Note: use the `na.rm = TRUE` argument to remove NA values from your aggregation
+
+```{r}
+
+
+```
+
+
+7. Create a data.frame of flights with a destination of Hobby Airport (Airport code 'HOU'), only including the origin, destination, and the "made_up_time" column you just created
+
+```{r}
+
+```
+
+
+8. On average, did flights to SeaTac gain or lose time?
+
+
+```{r}
+
+
+```
+
+  
+## Exercise: 
+
+
+Go back to our flights exercise data. Consider flights from JFK to SEA. What was the average, min, and max air time of those flights? Use pipes to answer this question in one statement (without showing any other data)!
+
+```{r}
+
+
+```
+
+Consider flights coming into Houston (HOU and IAH). What is the mean arrival delay by departure airport? 
+
+```{r}
+
+
+```
+
+Getting ready for next class: Create a list of all the different values for the destination airport.
+
+```{r}
+
+
+```
+
+Hmm... I don't know about you, but it sure does seem like there are some values here I don't recognize! 
+
+
+## Lab for the day:
+
+
+In the package `dplyr` there is a dataset called `starwars`. 
+
+```{r}
+glimpse(starwars)
+```
+
+
+We're going to use this to practice some data wrangling with `dplyr`. 
+
+First, we filter by species to only see the humans, and use that subset to plot a scatter plot of their height and mass.  
+
+```{r}
+humans <- starwars %>% filter(species == "Human")
+plot(humans$height, humans$mass)
+
+starwars %>% filter(species == "Human") %>% plot(mass ~ height, data = .)
+
+```
+
+Now, change this to see the same plot for the Droids. 
+
+```{r}
+
+
+```
+
+
+How many characters are from each planet?
+
+```{r}
+
+
+
+```
+
+If you wanted to arrange this in descending order, what would you add to the pipe? 
+
+```{r}
+
+```
+
+Find the average height for each eye color. You might find some of the answers to be strange, but keep going! 
+
+```{r}
+
+
+```
+
+So.... What's with the NAs? Filter down to just brown eyes find out what's going on. 
+
+
+```{r}
+
+
+```
+
+Okay, so we have missing data here. Try summarising with `na.omit(height)` instead of just `height` or adding `na.rm = T` to the mean function inside summarize. 
+
+
+```{r}
+
+
+```
+
+So, who is the tallest male? How many blue eyed women are there? How many genders are there? Answer these questions and spend some time asking and answering some of your own. 
+
+
+```{r}
+
+```
+
+
